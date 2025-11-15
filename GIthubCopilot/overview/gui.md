@@ -1,0 +1,77 @@
+# GUIでのGithub Copilotの使い方
+
+- /コマンド
+    - 既に用意されている提携タスクの呼び出しに利用できる
+        - AIを利用しないツール呼び出し
+            - /list => 利用可能なコマンド一覧を確認できる（その時々で利用可能なコマンドは変化します）
+            - /clear => チャット履歴をクリアします（別スレッドの履歴は削除されません）
+        - AIを利用するツール呼び出し
+            - /delegate => @cli/ delegateが呼ばれ、会話がGithub Copilot CLIに引き継がれます
+            - /search => @vscode /searchが呼ばれ、ワークスペース全体を検索できます
+        - AIを使うが、特定のツールや仕組みを利用せずに処理される
+            - /explain => @workspace /explainが呼ばれ、説明を生成します
+            - /fix => @workspace /fixが呼ばれ、コードの問題を修正します
+            - /new => @workspace /newが呼ばれ、新しい環境をセットアップします
+            - /newNotebook => @workspace /newNotebookが呼ばれ、新しいノートブックをセットアップします
+            - /setupTests => @workspace /setupTestsが呼ばれ、コードのテストフレームワークのセットアップに関するヘルプを受けられます。関連するテストフレームワークの推奨、セットアップと設定の手順、そしてVS Codeのテスト用拡張機能の提案を入手できます。
+            - /tests => @workspace /testsが呼ばれ、コードの一部または全体のテストケースを生成できます。
+            - /explain => @terminal /explainが呼ばれ、ターミナルコマンドの説明を生成します
+            - /savePrompt => GihubCopilotChat拡張機能が提供するコマンドで、現在のチャットから再利用可能なプロンプトファイルを生成します。詳細は```github-copilot/others/savePrompt.md```を参照してください。
+    - 他に、自分で作成した```.github/prompts```フォルダ配下のワークスペース専用プロンプトや、ユーザ共通用の```~/Library/Application Support/Code/User/profiles/-3c8ff839/prompts/```フォルダ配下の```.prompt.md```ファイルのプロンプトを呼び出すこともできます。
+
+- チャット参加者（@をつけることで、チャット参加者を指定できます）
+    - @cli => Github Copilot CLI
+    - @cloud => クラウドのGithub Action環境で動作するCoding Agent
+    - @github => Github上の質問に回答するAI（ISSUEやPRの内容も参照可能）
+    - @terminal => VSCodeのターミナルに関する質問に回答するAI
+    - @vscode => VSCodeのワークスペースを横断的に検索できるAI
+    - @workspace => 現在のワークスペースに関する質問に回答するAI
+    
+- ツール（#コマンドから呼び出せます）
+    - #changes	ソース管理の変更一覧を表示します。
+    - #codebase	現在のワークスペースでコード検索を行い、チャットプロンプトに関連するコンテキストを自動的に見つけます。
+    - #createAndRunTask	ワークスペースで新しいタスクを作成して実行します。
+    - #createDirectory	ワークスペースに新しいディレクトリを作成します。
+    - #createFile	ワークスペースに新しいファイルを作成します。
+    - #edit (tool set)	ワークスペース内のファイルを編集できるようにします。
+    - #editFiles	ワークスペース内のファイルに編集を適用します。
+    - #editNotebook	ノートブックを編集します。
+    - #extensions	VS Code拡張機能を検索したり質問できます。例：「Pythonの使い方 #extensions?」
+    - #fetch	指定したWebページの内容を取得します。例：「code.visualstudio.com/updatesを要約 #fetch」
+    - #fileSearch	ワークスペース内のファイルをグロブパターンで検索し、パスを返します。
+    - #getNotebookSummary	ノートブックのセル一覧と詳細を取得します。
+    - #getProjectSetupInfo	様々なプロジェクトのセットアップ手順や設定を提供します。
+    - #getTaskOutput	ワークスペースでタスクを実行した際の出力を取得します。
+    - #getTerminalOutput	ターミナルコマンドの出力を取得します。
+    - #githubRepo	GitHubリポジトリでコード検索を行います。例：「global snippetとは #githubRepo microsoft/vscode」
+    - #installExtension	VS Code拡張機能をインストールします。
+    - #listDirectory	ワークスペース内のディレクトリのファイル一覧を表示します。
+    - #new	デバッグや実行設定が事前構成された新しいVS Codeワークスペースを作成します。
+    - #newJupyterNotebook	説明文から新しいJupyterノートブックを作成します。
+    - #newWorkspace	新しいワークスペースを作成します。
+    - #openSimpleBrowser	組み込みのSimple BrowserでローカルWebアプリをプレビューします。
+    - #problems	問題パネルのワークスペースの課題や問題をコンテキストとして追加します。コード修正やデバッグ時に便利です。
+    - #readFile	ワークスペース内のファイル内容を読み取ります。
+    - #readNotebookCellOutput	ノートブックセルの実行結果を読み取ります。
+    - #runCell	ノートブックセルを実行します。
+    - #runCommands (tool set)	ターミナルでコマンドを実行し、出力を取得できるようにします。
+    - #runInTerminal	統合ターミナルでシェルコマンドを実行します。
+    - #runNotebooks (tool set)	ノートブックセルを実行できるようにします。
+    - #runTask	ワークスペースで既存のタスクを実行します。
+    - #runTasks (tool set)	ワークスペースでタスクを実行し、出力を取得できるようにします。
+    - #runSubagent	サブエージェントのコンテキストでタスクを実行します。メインエージェントのコンテキスト管理を改善します。
+    - #runTests	ワークスペースでユニットテストを実行します。
+    - #runVscodeCommand	VS Codeコマンドを実行します。例：「Zenモードを有効化 #runVscodeCommand」
+    - #search (tool set)	現在のワークスペース内でファイル検索を行えるようにします。
+    - #searchResults	検索ビューの検索結果を取得します。
+    - #selection	現在のエディタ選択範囲を取得します（テキスト選択時のみ）。
+    - #terminalLastCommand	最後に実行したターミナルコマンドとその出力を取得します。
+    - #terminalSelection	現在のターミナル選択範囲を取得します。
+    - #testFailure	ユニットテスト失敗情報を取得します。テスト実行や診断時に便利です。
+    - #textSearch	ファイル内のテキストを検索します。
+    - #todos	チャットリクエストの実装や進捗をToDoリストで管理します。
+    - #usages	「すべての参照を検索」「実装を検索」「定義へ移動」を組み合わせた機能です。
+    - #VSCodeAPI	VS Codeの機能や拡張機能開発について質問できます。
+
+- VSCODE公式ドキュメント
+    - https://code.visualstudio.com/docs/copilot/reference/copilot-vscode-features#_slash-commands

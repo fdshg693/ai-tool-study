@@ -1,0 +1,18 @@
+{
+  // 複数のMCPサーバーを定義可能
+  "servers": {
+    "github-mcp": {
+      // === 必須 ===
+      // 	"http", "sse"
+      "type": "http",
+      // リモートMCPサーバーのURLを指定
+      // "http://localhost:3000", "https://api.example.com/mcp"
+      "url": "https://api.githubcopilot.com/mcp",
+
+      //=== 必須でない ===
+      "headers": {
+        	"Authorization": "Bearer ${input:api-token}"
+        }
+    }
+    }
+}
