@@ -10,8 +10,9 @@ copilot
 - @path/to/file と入力して、特定のファイルをコンテキストとして渡すことができます。
 
 - 信頼済みフォルダ・ファイルに対してCopilotは作業を行える
-    - ```/add-dir /path/to/directory``` でディレクトリを追加
-    - ```/add-file /path/to/file``` でファイルを追加
+    - ```/add-dir /path/to/directory``` でディレクトリを信頼済みフォルダに追加（編集しない限り永続的）
+    - ```/add-file /path/to/file``` でファイルを会話のコンテキストに追加（一時的）
+    - ```~/.copilot```フォルダ配下の```config.json```に保存される。このフォルダは、XDG_CONFIG_HOME環境変数で変更可能
 - copilotのセッション中でも、以下のようにして、「!」を先頭に追加することで、直接シェルコマンドを実行できる
     - ```!ls -la```
 - クラウドのCodin Agentにチャットを委譲することも可能
@@ -30,6 +31,15 @@ copilot
 - MCPサーバーの追加
     - ```/mcp add```より、詳細情報を入力
     - MCPは```~/.copilot/mcp-config.json```に保存される
-
+- ツール許可
+    - ```--allow-all-tools```オプションで、すべてのツールを許可
+    - ```--deny-tool <tool-name>```オプションで、特定のツールを拒否(allowオプションより優先)
+    - ```--allow-tool <tool-name>```オプションで、特定のツールを許可
+    - <tool-name>の書き方
+        - 'shell(COMMAND)': 特定のシェルコマンドの実行（例: 'shell(ls)', 'shell(git status)'）
+        - 'write': ファイルの編集許可（シェルコマンド以外の）
+        - 'My-MCP-Server(tool_name)'
+- 使えるモデル
+    - ```/model```で利用可能なモデル一覧を表示
 - 参考文献
     - https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli#trusted-directories

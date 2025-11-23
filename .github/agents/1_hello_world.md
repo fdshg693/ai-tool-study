@@ -2,7 +2,6 @@
 name: HelloWorldAgent
 description: サンプル用のHELLO =>WORLDの順番で返すエージェントです。
 argument-hint: 指示通りに行なってください。
-tools: []
 model: GPT-4.1
 target: github-copilot
 mcp-servers: {}
