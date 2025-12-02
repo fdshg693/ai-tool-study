@@ -27,10 +27,13 @@ copilot
     - インタラクティブモードにて、```/agent```から選択可能
     - 直接、プロンプトから「〜〜エージェントを使用して」と指定することも可能
     - 直接指定も可能
-    ```copilot --agent=refactor-agent --prompt "コードをリファクタリングして"```
+        - ```copilot --agent=refactor-agent --prompt "コードをリファクタリングして"```
+        - この場合は、 --promptオプションが必須（2025/12/2）
 - MCPサーバーの追加
     - ```/mcp add```より、詳細情報を入力
     - MCPは```~/.copilot/mcp-config.json```に保存される
+    - 現状、デフォルトでGithub MCPサーバーが登録されている
+        -（--disable-builtin-mcps オプションで無効化可能・--disable-mcp-server <server-name>オプションで特定のMCPサーバーを無効化可能）
 - ツール許可
     - ```--allow-all-tools```オプションで、すべてのツールを許可
     - ```--deny-tool <tool-name>```オプションで、特定のツールを拒否(allowオプションより優先)
@@ -41,5 +44,11 @@ copilot
         - 'My-MCP-Server(tool_name)'
 - 使えるモデル
     - ```/model```で利用可能なモデル一覧を表示
+- エージェント設定ファイルで有効な項目・無効な項目
+    - 有効な項目
+        - prompt
+    - 無効な項目
+        - model
+        - tools
 - 参考文献
     - https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli#trusted-directories
